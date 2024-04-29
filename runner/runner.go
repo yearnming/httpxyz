@@ -70,6 +70,7 @@ import (
 	pdhttputil "github.com/projectdiscovery/utils/http"
 	iputil "github.com/projectdiscovery/utils/ip"
 	wappalyzer "github.com/projectdiscovery/wappalyzergo"
+	wappalyzer1 "github.com/yearnming/wappalyzer"
 )
 
 // Runner is a client for running the enumeration process.
@@ -1766,7 +1767,8 @@ retry:
 
 	var technologies []string
 	if scanopts.TechDetect != "false" {
-		matches := r.wappalyzer.Fingerprint(resp.Headers, resp.Data)
+		//matches := r.wappalyzer.Fingerprint(resp.Headers, resp.Data)
+		matches := wappalyzer1.Wappalyzer(resp.Headers, resp.Data, fullURL)
 		for match := range matches {
 			technologies = append(technologies, match)
 		}
